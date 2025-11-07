@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Pemesanan</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/data.js"></script>
+    <style>
+        #tabelHistory {
+        width: 95%;
+        max-width: 900px;
+        margin: 30px auto;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        #tabelHistory th, #tabelHistory td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+        }
+
+        #tabelHistory th {
+        background: #1976d2;
+        color: white;
+        }
+
+        #tabelHistory tr:nth-child(even) {
+        background: #f7faff;
+        }
+    </style>
+</head>
+<body>
+    <h2>Riwayat Pemesanan Buku</h2>
+    
+    <table id="tabelHistory">
+        <thead>
+            <tr>
+                <th>Nama Pemesan</th>
+                <th>Judul Buku</th>
+                <th>Jumlah</th>
+                <th>Total</th>
+                <th>Metode</th>
+                <th>Tanggal</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <button id="backBtn" class="back-btn">⬅ Kembali ke Dashboard</button>
+    <script>
+        document.getElementById("backBtn").addEventListener("click", () => {
+        window.location.href = "dashboard.html";
+        });
+
+        const dataHistory = JSON.parse(localStorage.getItem("historyPesanan")) || [];
+        const tbody = document.querySelector("#tabelHistory tbody");
+
+        if (dataHistory.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6">Belum ada data pemesanan.</td></tr>`;
+        } else {
+        dataHistory.forEach(item => {
+            tbody.innerHTML += `
+            <tr>
+                <td>${item.namaPemesan}</td>
+                <td>${item.buku}</td>
+                <td>${item.jumlah}</td>
+                <td>${item.total}</td>
+                <td>${item.metode}</td>
+                <td>${item.tanggal}</td>
+            </tr>`;
+        });
+        }
+    </script>
+</body>
+</html>

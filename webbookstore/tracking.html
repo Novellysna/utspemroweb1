@@ -1,0 +1,91 @@
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Pengiriman</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/tracking.js"></script>
+    <script defer src="js/data.js"></script>
+    <style>
+        .tracking-box {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 650px;
+            margin: 30px auto;
+        }
+
+        .timeline {
+            border-left: 4px solid #1976d2;
+            margin-top: 15px;
+            padding-left: 15px;
+        }
+
+        .progress-step {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .progress-step::before {
+            content: "";
+            position: absolute;
+            left: -10px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: #1976d2;
+            border-radius: 50%;
+        }
+
+        .progress-step .time {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .progress-step .desc {
+            background: #e3f2fd;
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin-top: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: #42a5f5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 15px 0 15px 20px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1e88e5;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            .tracking-box { padding: 15px; font-size: 0.9em; }
+            .timeline { border-left-width: 3px; }
+        }
+    </style>
+</head>
+<body>
+    <h2>Cek Status Pengiriman</h2>
+    <input id="doNum" placeholder="Masukkan Nomor DO">
+    <button id="btnCari">Cari</button>
+    <div id="hasil"></div>
+    <button id="backBtn" class="back-btn">⬅ Kembali ke Dashboard</button>
+    <script>
+        document.getElementById("backBtn").addEventListener("click", () => {
+            window.location.href = "dashboard.html";
+        });
+    </script>
+</body>
+</html>

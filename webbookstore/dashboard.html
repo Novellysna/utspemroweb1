@@ -1,0 +1,46 @@
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Toko Buku</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="greeting"></h1>
+    </header>
+    <nav class="menu">
+        <a href="stok.html">Informasi Stok</a>
+        <a href="tracking.html">Tracking Pengiriman</a>
+        <a href="checkout.html">Laporan Pemesanan</a>
+        <a href="history.html">History Pemesanan</a>
+    </nav>
+    <button id="logoutBtn" class="logout-btn">Logout</button>
+    <script>
+        const userActive = JSON.parse(localStorage.getItem("userActive"));
+        if (!userActive) {
+            alert("Silakan login terlebih dahulu!");
+            window.location.href = "login.html";
+        }
+
+        const jam = new Date().getHours();
+        let greet = "Selamat malam";
+        if (jam < 11) greet = "Selamat pagi";
+        else if (jam < 15) greet = "Selamat siang";
+        else if (jam < 18) greet = "Selamat sore";
+
+        document.getElementById("greeting").textContent = `${greet}, ${userActive.nama}!`;
+
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+        if (confirm("Yakin ingin logout?")) {
+            localStorage.removeItem("userActive");
+            alert("Anda telah logout.");
+            window.location.href = "login.html";
+        }
+        });
+    </script>
+</body>
+</html>

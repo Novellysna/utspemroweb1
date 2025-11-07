@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Buku</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/data.js"></script>
+</head>
+<body>
+
+    <h2>Form Pemesanan Buku</h2>
+
+    <form id="formOrder" class="order-form">
+        <label for="judulBuku">Pilih Buku:</label>
+        <select id="judulBuku" required></select>
+
+        <label for="jumlah">Jumlah:</label>
+        <input type="number" id="jumlah" min="1" placeholder="Masukkan jumlah" required>
+
+        <label for="namaPemesan">Nama Pemesan:</label>
+        <input type="text" id="namaPemesan" placeholder="Nama Lengkap" required>
+
+        <label for="metode">Metode Pembayaran:</label>
+        <select id="metode" required>
+        <option>Transfer Bank</option>
+        <option>COD</option>
+        </select>
+
+        <button type="submit">Pesan Sekarang</button>
+    </form>
+
+    <button id="backBtn" class="back-btn">⬅ Kembali ke Dashboard</button>
+    <script>
+        document.getElementById("backBtn").addEventListener("click", () => {
+        window.location.href = "dashboard.html";
+        });
+
+        const selectBuku = document.getElementById("judulBuku");
+        dataKatalogBuku.forEach(buku => {
+        const option = document.createElement("option");
+        option.value = buku.kodeBarang;
+        option.textContent = `${buku.namaBarang} - ${buku.harga}`;
+        selectBuku.appendChild(option);
+        });
+
+        document.getElementById("formOrder").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const kode = selectBuku.value;
+        const buku = dataKatalogBuku.find(b => b.kodeBarang === kode);
+        const jumlah = parseInt(document.getElementById("jumlah").value);
+        const nama = document.getElementById("namaPemesan").value;
+        const metode = document.getElementById("metode").value;
+
+        const totalHarga = jumlah * parseInt(buku.harga.replace(/[^0-9]/g, ""));
+        const dataPesanan = {
+            namaPemesan: nama,
+            buku: buku.namaBarang,
+            jumlah: jumlah,
+            total: `Rp ${totalHarga.toLocaleString("id-ID")}`,
+            metode: metode,
+            tanggal: new Date().toLocaleString()
+        };
+
+        const histori = JSON.parse(localStorage.getItem("historyPesanan")) || [];
+        histori.push(dataPesanan);
+        localStorage.setItem("historyPesanan", JSON.stringify(histori));
+
+        alert("Pesanan berhasil disimpan!");
+        document.getElementById("formOrder").reset();
+        });
+    </script>
+</body>
+</html>
