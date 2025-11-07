@@ -36,15 +36,17 @@ web bookstore/
 │   └── style.css     → Desain tampilan utama (warna putih–biru pastel)
 │── README.md         → Dokumentasi proyek
 
+
 # 🔐 Login
+Gunakan akun contoh berikut untuk masuk ke sistem (tersimpan di `data.js`):
 
-Gunakan akun contoh berikut untuk masuk ke sistem (tersimpan di data.js):
+| Role  | Nama                 | Email             | Password   |
+|-------|----------------------|-------------------|-------------|
+| User  | Rina Wulandari       | rina@gmail.com    | rina123     |
+| User  | Agus Pranoto         | agus@gmail.com    | agus123     |
+| Admin | Novellysna Nurziska  | novell@gmail.com  | novell123   |
 
-Role	Email	Password
-Admin	admin@bookstore.com
-	admin
-User	user@bookstore.com
-	user
+	
 # 🧭 Dashboard
 
 Menampilkan:
